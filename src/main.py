@@ -9,7 +9,7 @@ def learning_hub():
 
         match input_prompt:
             case "1":
-                print("You selected Python Basics.")
+                pythonRoadMap()
             case "2":
                 print("You selected Data Science.")
             case "3":
@@ -18,6 +18,23 @@ def learning_hub():
                 break
             case _:
                 print("Invalid input. Please try again.")
+                
+def pythonRoadMap():
+     pythonTopics=[
+        "Variables",
+        "Data Types",
+        "Operators",
+        "If / Else",
+        "Loops",
+        "Functions",
+        "Modules",
+        "OOP",
+        "File Handling",
+        "Back"
+     ]
+     for index,topic in enumerate(pythonTopics,start=1):
+        print(f"{index}. {topic}")
+     input_prompt = input("Please select an option: ")              
 def project_hub():
     while True:
         print("Welcome to the Project Hub!")
