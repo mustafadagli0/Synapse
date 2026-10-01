@@ -1,3 +1,6 @@
+import math
+
+
 def learning_hub():
     while True:
         print("Welcome to the Learning Hub!")
@@ -5,36 +8,212 @@ def learning_hub():
         print("2. SQL")
         print("3. GİT")
         print("4. Back")
-        input_prompt = input("Please select an option: ")
+        input_prompt = int(input("Please select an option: "))
+        if input_prompt == 4:
+            return
+        functions = [pythonRoadMap, sqlRoadMap, gitRoadMap]
+        functions[input_prompt - 1]()  
 
-        match input_prompt:
-            case "1":
-                pythonRoadMap()
-            case "2":
-                print("You selected Data Science.")
-            case "3":
-                print("You selected Machine Learning.")
-            case "4":
-                break
-            case _:
-                print("Invalid input. Please try again.")
-                
+
+def sqlRoadMap():
+     print("You selected SQL Roadmap.")
+def gitRoadMap():
+     print("You selected GİT Roadmap.")
+
+             
 def pythonRoadMap():
-     pythonTopics=[
-        "Variables",
-        "Data Types",
-        "Operators",
-        "If / Else",
-        "Loops",
-        "Functions",
-        "Modules",
-        "OOP",
-        "File Handling",
-        "Back"
-     ]
-     for index,topic in enumerate(pythonTopics,start=1):
-        print(f"{index}. {topic}")
-     input_prompt = input("Please select an option: ")              
+     while True:
+        pythonTopics=[
+                  "Variables",
+                  "Data Types",
+                  "Operators",
+                  "If / Else",
+                  "Loops",
+                  "Functions",
+                  "Modules",
+                  "OOP",
+                  "File Handling",
+                  "Back"
+               ]
+          
+        for index,topic in enumerate(pythonTopics,start=1):
+                  print(f"{index}. {topic}")
+        input_prompt = input("Please select an option: ") 
+        if int(input_prompt) == 10:
+            return 
+        Functions=[Veriables,Data_Types,Operators,If_Else,Loops,FFunctions,Modules,OOP,File_Handling]
+        Functions[int(input_prompt)-1]()  
+
+def Veriables():
+    print("\n--- Variables ---")
+    print("A variable is used to store data in Python.")
+    print("You can create a variable by giving it a name and assigning a value.")
+    
+    print("\nExample:")
+    print("name = 'Ahmet'")
+    print("age = 25")
+    
+    print("\nHere, name stores a string and age stores an integer.")
+    
+    name = input("\nEnter your name: ")
+    print("hello "+name)  
+def Data_Types():
+    print("\n--- Data Types ---")
+    print("Python has different data types for storing different kinds of data.")
+
+    print("\nCommon data types:")
+    print("str   -> Text")
+    print("int   -> Whole numbers")
+    print("float -> Decimal numbers")
+    print("bool  -> True or False")
+
+    print("\nExamples:")
+    print("name = 'Ahmet'      # str")
+    print("age = 25            # int")
+    print("height = 1.75       # float")
+    print("is_student = True   # bool")
+
+    name = input("\nEnter your name: ")
+    age = int(input("Enter your age: "))
+    height = float(input("Enter your height in meters: "))
+    print(f"Hello {name}, you are {age} years old and {height} meters tall.")
+
+def Operators():
+    print("\n--- Operators ---")
+    print("Operators are used to perform operations on values.")
+
+    print("\nArithmetic operators:")
+    print("+  Addition")
+    print("-  Subtraction")
+    print("*  Multiplication")
+    print("/  Division")
+    print("%  Modulus")
+
+    print("\nExamples:")
+    print("10 + 5 = 15")
+    print("10 - 5 = 5")
+    print("10 * 5 = 50")
+    print("10 / 5 = 2")
+    print("10 % 3 = 1")
+
+    digit1 = float(input("\nEnter first number: "))
+    digit2 = float(input("Enter second number: "))
+    print(f"{digit1} + {digit2} = {digit1 + digit2}")
+    print(f"{digit1} - {digit2} = {digit1 - digit2}")
+    print(f"{digit1} * {digit2} = {digit1 * digit2}")
+    print(f"{digit1} / {digit2} = {digit1 / digit2}")
+
+def If_Else():
+    print("\n--- If / Else ---")
+    print("If / Else is used to make decisions in Python.")
+
+    print("\nExample:")
+    print("age = 18")
+    print("if age >= 18:")
+    print("    print('You are an adult.')")
+    print("else:")
+    print("    print('You are not an adult.')")
+
+    print("\nPython checks a condition and executes the appropriate block.")
+
+    age=int(input("\nEnter your age: "))
+    if age >= 18:
+        print("You are an adult.")
+    else:
+        print("You are not an adult.")
+
+def Loops():
+    print("\n--- Loops ---")
+    print("Loops are used to repeat code.")
+
+    print("\nFor loop example:")
+    print("for i in range(5):")
+    print("    print(i)")
+
+    print("\nThis prints numbers from 0 to 4.")
+
+    print("\nWhile loop example:")
+    print("count = 0")
+    print("while count < 5:")
+    print("    print(count)")
+    print("    count += 1")
+
+    for x in range(1,5):
+        print(x)
+    i=0
+    while i<5:
+        i=i+1
+        print(i)
+
+def FFunctions():
+    def greet():
+        print("Hello, welcome to Synapse!")
+
+    print("\n--- Functions ---")
+    print("A function is a reusable block of code.")
+
+    print("\nExample:")
+    print("def greet():")
+    print("    print('Hello!')")
+    print("")
+    print("greet()")
+
+    print("\nFunctions help us organize and reuse code.")
+    greet()
+
+def Modules():
+    print("\n--- Modules ---")
+    print("A module is a Python file containing code that can be reused.")
+
+    print("\nExample:")
+    print("import math")
+    print("print(math.sqrt(25))")
+
+    print("\nPython provides many built-in modules.")
+    print("You can also create your own modules.")
+
+    print("math.sqrt(25)= ", math.sqrt(25))
+    print("math.pow(5, 2)= ", math.pow(5, 2))
+def OOP():
+    print("\n--- Object-Oriented Programming ---")
+    print("OOP is a programming approach based on objects and classes.")
+
+    print("\nA class is like a blueprint for creating objects.")
+
+    print("\nExample:")
+    print("class Person:")
+    print("    def __init__(self, name):")
+    print("        self.name = name")
+
+    print("\nOOP helps us organize larger programs.")
+
+    class Student:
+        name = "Mustafa"
+        age = 21
+    student = Student()    
+    print(student.name)
+    print(student.age)
+
+def File_Handling():    
+    print("\n--- File Handling ---")
+    print("File handling allows Python to read and write files.")
+
+    print("\nWriting to a file:")
+    print("with open('data.txt', 'w') as file:")
+    print("    file.write('Hello Python')")
+
+    print("\nReading a file:")
+    print("with open('data.txt', 'r') as file:")
+    print("    content = file.read()")
+
+    print("\nPython can create, read and modify files.")
+
+    with open('synapse.txt', 'w') as file:
+         file.write('I am learning Python with Synapse.')
+         file.close()
+    with open('synapse.txt', 'r') as file:     
+        print(file.read())
+
 def project_hub():
     while True:
         print("Welcome to the Project Hub!")
@@ -42,7 +221,7 @@ def project_hub():
         print("2. Create Project")
         print("3. Project Roadmaps")
         print("4. Back")
-        input_prompt = input("Please select an option: ")
+        input_prompt = input("the selected option: ")
 
         match input_prompt:
             case "1":
