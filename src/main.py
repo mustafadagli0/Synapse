@@ -1,5 +1,13 @@
 import math
+import json
 
+with open("progress.json", "r") as f:
+                  data = json.load(f)
+
+def save_progress(a):
+    data["pythonProgress"][a] = True
+    with open("progress.json", "w") as f:
+        json.dump(data, f)
 
 def learning_hub():
     while True:
@@ -35,28 +43,37 @@ def pythonRoadMap():
                   "File Handling",
                   "Back"
                ]
-          
+        
+        with open("progress.json", "r") as f:
+            data = json.load(f)      
+
         for index,topic in enumerate(pythonTopics,start=1):
-                  print(f"{index}. {topic}")
+                  print(f"{index}. {topic} Progress: {'Completed' if data['pythonProgress'][index-1] else 'Not Completed'}")
+                   
         input_prompt = input("Please select an option: ") 
+
         if int(input_prompt) == 10:
             return 
         Functions=[Veriables,Data_Types,Operators,If_Else,Loops,FFunctions,Modules,OOP,File_Handling]
         Functions[int(input_prompt)-1]()  
+       
 
 def Veriables():
+
     print("\n--- Variables ---")
     print("A variable is used to store data in Python.")
-    print("You can create a variable by giving it a name and assigning a value.")
-    
+    print("You can create a variable by giving it a name and assigning a value.")  
     print("\nExample:")
     print("name = 'Ahmet'")
-    print("age = 25")
-    
-    print("\nHere, name stores a string and age stores an integer.")
+    print("age = 25")  
+    print("\nHere, name stores a string and age stores an integer.") 
     
     name = input("\nEnter your name: ")
     print("hello "+name)  
+
+    
+    save_progress(0)
+
 def Data_Types():
     print("\n--- Data Types ---")
     print("Python has different data types for storing different kinds of data.")
@@ -78,6 +95,8 @@ def Data_Types():
     height = float(input("Enter your height in meters: "))
     print(f"Hello {name}, you are {age} years old and {height} meters tall.")
 
+    save_progress(1)
+   
 def Operators():
     print("\n--- Operators ---")
     print("Operators are used to perform operations on values.")
@@ -103,6 +122,9 @@ def Operators():
     print(f"{digit1} * {digit2} = {digit1 * digit2}")
     print(f"{digit1} / {digit2} = {digit1 / digit2}")
 
+  
+    save_progress(2)
+
 def If_Else():
     print("\n--- If / Else ---")
     print("If / Else is used to make decisions in Python.")
@@ -121,6 +143,9 @@ def If_Else():
         print("You are an adult.")
     else:
         print("You are not an adult.")
+
+   
+    save_progress(3)
 
 def Loops():
     print("\n--- Loops ---")
@@ -144,7 +169,12 @@ def Loops():
     while i<5:
         i=i+1
         print(i)
+   
+    save_progress(4)
 
+
+
+    
 def FFunctions():
     def greet():
         print("Hello, welcome to Synapse!")
@@ -160,6 +190,8 @@ def FFunctions():
 
     print("\nFunctions help us organize and reuse code.")
     greet()
+    
+    save_progress(5)
 
 def Modules():
     print("\n--- Modules ---")
@@ -174,6 +206,11 @@ def Modules():
 
     print("math.sqrt(25)= ", math.sqrt(25))
     print("math.pow(5, 2)= ", math.pow(5, 2))
+    
+    save_progress(6)
+
+
+    
 def OOP():
     print("\n--- Object-Oriented Programming ---")
     print("OOP is a programming approach based on objects and classes.")
@@ -193,6 +230,8 @@ def OOP():
     student = Student()    
     print(student.name)
     print(student.age)
+    
+    save_progress(7)
 
 def File_Handling():    
     print("\n--- File Handling ---")
@@ -214,6 +253,11 @@ def File_Handling():
     with open('synapse.txt', 'r') as file:     
         print(file.read())
 
+    
+    save_progress(8)
+
+
+    
 def project_hub():
     while True:
         print("Welcome to the Project Hub!")
