@@ -1,0 +1,11 @@
+{
+    "projects": [
+        {
+            "name": "proje1",
+            "description": "fsfsf",
+            "technologies": [
+                "python"
+            ]
+        }
+    ]
+}

@@ -1,8 +1,21 @@
 import math
 import json
+import pandas as pd
 
 with open("progress.json", "r") as f:
-                  data = json.load(f)
+    data = json.load(f)
+
+
+def load_projects():
+    with open("projects.json", "r") as f:
+        raw_data = json.load(f)
+    return raw_data.get("projects", [])
+
+
+def save_projects(projects):
+    with open("projects.json", "w") as f:
+        json.dump({"projects": projects}, f, indent=4)
+
 
 def save_progress(a):
     data["pythonProgress"][a] = True
@@ -257,7 +270,7 @@ def File_Handling():
     save_progress(8)
 
 
-    
+
 def project_hub():
     while True:
         print("Welcome to the Project Hub!")
@@ -265,19 +278,54 @@ def project_hub():
         print("2. Create Project")
         print("3. Project Roadmaps")
         print("4. Back")
-        input_prompt = input("the selected option: ")
+        input_prompt = int(input("the selected option: ")
+)
+        FFunction=[my_projects,create_project,project_roadmaps]
+        if input_prompt == 4:
+            return
+        FFunction[int(input_prompt)-1]()
 
-        match input_prompt:
-            case "1":
-                print("You selected Project 1.")
-            case "2":
-                print("You selected Project 2.")
-            case "3":
-                print("You selected Project 3.")
-            case "4":
-                break
-            case _:
-                print("Invalid input. Please try again.")
+def my_projects():
+    print("You selected My Projects.")
+    projects = load_projects()
+    print("My Projects:")
+    for project in projects:
+        techs = project.get("technologies", [])
+        print(f"- {project['name']}: {project['description']}/ Technologies: {', '.join(techs) if techs else 'No technologies listed'}")
+
+
+def create_project():
+    print("You selected Create Project.")
+    projects = load_projects()
+
+    name = input("Enter project name: ")
+    description = input("Enter project description: ")
+    technologies = input("Enter technologies used (comma-separated): ").split(",")
+
+    new_project = {
+        "name": name,
+        "description": description,
+        "technologies": [tech.strip() for tech in technologies if tech.strip()]
+    }
+
+    projects.append(new_project)
+    save_projects(projects)
+
+def project_roadmaps():
+    print("You selected Project Roadmaps.")
+    print("""
+    1. Python Project
+       → Python Basics
+       → File Handling
+       → OOP
+       → Project Development
+    
+    2. Data Analysis Project
+       → NumPy
+       → Pandas
+       → Data Cleaning
+       → Visualization""")
+    
 def data_lab():
     while True:
             print("Welcome to the Data Hub!")
@@ -287,20 +335,19 @@ def data_lab():
             print("4. Data Visualization")
             print("5. Back")
             input_prompt = input("Please select an option: ")
-    
-            match input_prompt:
-                case "1":
-                    print("You selected Load Dataset.")
-                case "2":
-                    print("You selected View Dataset.")
-                case "3":
-                    print("You selected Data Cleaning.")
-                case "4":
-                    print("You selected Data Visualization.")
-                case "5":
-                    break
-                case _:
-                    print("Invalid input. Please try again.")
+            if input_prompt == "5":
+                return
+            FFunctions=[load_dataset,view_dataset,data_cleaning,data_visualization]
+            
+            FFunctions[int(input_prompt)-1]()
+def load_dataset():
+    print("You selected Load Dataset.")
+def view_dataset():
+    print("You selected View Dataset.")
+def data_cleaning():
+    print("You selected Data Cleaning.")
+def data_visualization():
+    print("You selected Data Visualization.")          
 def machine_learning_lab():         
      while True:
                 print("Welcome to the Machine LearningHub!")
@@ -408,4 +455,3 @@ while True:
             break
         case _:
             print("Invalid input. Please try again.")
-        
