@@ -1,10 +1,14 @@
 import math
 import json
 import pandas as pd
+import numpy as np
+import matplotlib as plt
 
 with open("progress.json", "r") as f:
     data = json.load(f)
 
+
+df=None
 
 def load_projects():
     with open("projects.json", "r") as f:
@@ -278,8 +282,7 @@ def project_hub():
         print("2. Create Project")
         print("3. Project Roadmaps")
         print("4. Back")
-        input_prompt = int(input("the selected option: ")
-)
+        input_prompt = int(input("the selected option: ").strip())
         FFunction=[my_projects,create_project,project_roadmaps]
         if input_prompt == 4:
             return
@@ -340,14 +343,47 @@ def data_lab():
             FFunctions=[load_dataset,view_dataset,data_cleaning,data_visualization]
             
             FFunctions[int(input_prompt)-1]()
+
+            
 def load_dataset():
-    print("You selected Load Dataset.")
+    global df
+    file_path = input("Enter the path to the CSV file: ").strip().strip("'\"")
+    df=pd.read_csv(file_path)
+    df.head()
+    print("dataset loaded successfully.")
+    
 def view_dataset():
-    print("You selected View Dataset.")
+    df.head()
+    df.tail()
+    df.info()
 def data_cleaning():
-    print("You selected Data Cleaning.")
+    global df
+    print(df.isnull().sum())
+    print(f"df.duplicated().sum(): {df.duplicated().sum()}")
+    print(df.drop_duplicates())
+    print(df.dtypes)
+    print(df.describe())
+    print(df["status"].value_counts())
+    print(df["signup_date"].unique())
+    df["status"] = df["status"].str.lower()
+    df = df.drop_duplicates()   
+    df.to_csv('/Users/mustafadagli/Desktop/python/Synapse-1/Synapse/customers-100.csv', index=False)
+    print(df["age"].describe())
+    df["age"]=df["age"].fillna(df["age"].median())
+    print(df["income"].describe())
+    df["income"]=df["income"].fillna(df["income"].mean())
+    print(df["rating"].describe())
+    df["rating"]=df["rating"].fillna(df["rating"].mean())
+    df["signup_date"] = pd.to_datetime(df["signup_date"], errors="coerce")
+    print(df["signup_date"].max())
+    print(df["signup_date"].min())
+    df["signup_date"] = df["signup_date"].fillna(df["signup_date"].median())
+    print(df["email"].unique())
+    print(df[df["email"]=="missing-email"])
+    df["email"] = df["email"].replace("missing-email", np.nan)
 def data_visualization():
-    print("You selected Data Visualization.")          
+    global df       
+    print(df["city"].value_counts() )
 def machine_learning_lab():         
      while True:
                 print("Welcome to the Machine LearningHub!")
@@ -428,7 +464,7 @@ def growth_tracker():
 
 
 while True:
-
+    print(f"matplotlib version: {plt.__version__}")
     print("1. Learning Hub")
     print("2. Project Hub")
     print("3. Data Lab")
