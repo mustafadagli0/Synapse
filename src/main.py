@@ -2,7 +2,7 @@ import math
 import json
 import pandas as pd
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 with open("progress.json", "r") as f:
     data = json.load(f)
@@ -382,8 +382,27 @@ def data_cleaning():
     print(df[df["email"]=="missing-email"])
     df["email"] = df["email"].replace("missing-email", np.nan)
 def data_visualization():
-    global df       
-    print(df["city"].value_counts() )
+    global df 
+    a=df["city"].value_counts()       
+    print(a)
+    x=a.index
+    y=df["city"].value_counts().values
+    plt.bar(x,y)
+    plt.xticks(rotation=45)
+    plt.show()
+    plt.close()
+    print(df["age"].value_counts())
+    x=df["age"]
+    plt.hist(x,60)
+    plt.show()
+    plt.close()
+    plt.scatter(df["age"],df["income"])
+    plt.show()
+    plt.close()
+    df["signup_date"].value_counts().sort_index().plot()
+    plt.xticks(rotation=45)
+    plt.show()
+    plt.close()
 def machine_learning_lab():         
      while True:
                 print("Welcome to the Machine LearningHub!")
@@ -464,7 +483,7 @@ def growth_tracker():
 
 
 while True:
-    print(f"matplotlib version: {plt.__version__}")
+
     print("1. Learning Hub")
     print("2. Project Hub")
     print("3. Data Lab")
