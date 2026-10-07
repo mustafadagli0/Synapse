@@ -3,6 +3,15 @@ import json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
 
 with open("progress.json", "r") as f:
     data = json.load(f)
@@ -412,43 +421,88 @@ def machine_learning_lab():
                 print("4. Model Evaluation")
                 print("5. Back")
                 input_prompt = input("Please select an option: ")
+                FFunctions=[Regression,Classification,Clustering,Model_Evaluation,]
+                if input_prompt == "5":
+                    return  
+                FFunctions[int(input_prompt)-1]()
         
-                match input_prompt:
-                    case "1":
-                        print("You selected Regression.")
-                    case "2":
-                        print("You selected Classification.")
-                    case "3":
-                        print("You selected Clustering.")
-                    case "4":
-                        print("You selected Model Evaluation.")
-                    case "5":
-                        break
-                    case _:
-                        print("Invalid input. Please try again.")
+def Regression():
+    X=pd.DataFrame(df["age"])
+    y=pd.Series(df["income"])
+    X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2,random_state=42
+)
+
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    predictions = model.predict(X_test)
+    accuracy = model.score(X_test, y_test)
+    mea=mean_squared_error(y_test, predictions)
+    print(f"Regression model accuracy: {accuracy:.2f}")
+    print(model.predict([[35]]))
+    print(f"{mea:.2f}")
+def Classification():   
+    df["status"].value_counts()
+    X=df[["age","income","orders","rating"]]
+    y=df["status"]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = LogisticRegression()
+    model.fit(X_train,y_train)
+    predictions = model.predict(X_test)
+    print(predictions)
+    accuracy=model.score(X_test,y_test)
+    print(f"Classificiton model accuracy:{accuracy:.2f}")
+
+def Clustering():
+    print("You selected Clustering.")
+    X=df[["age","income","orders","rating"]]
+    scaler=StandardScaler()
+    X_scaled=scaler.fit_transform(X)
+    model = KMeans(n_clusters=3,random_state=42)
+    model.fit(X_scaled)
+    labels=model.labels_
+    print(labels)
+def Model_Evaluation():
+    print("You selected Model Evaluation.")  
+    df["status"].value_counts()
+    X=df[["age","income","orders","rating"]]
+    y=df["status"]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = LogisticRegression()
+    model.fit(X_train,y_train)
+    predictions = model.predict(X_test)
+    precision=precision_score(predictions,y_test,pos_label="active") 
+    recall = recall_score(predictions, y_test, pos_label="active")  
+    f1 = f1_score(predictions,y_test, pos_label="active")
+    print(precision)
+    print(recall)
+    print(f1)
+
 def ai_lab():
     while True:
-                   print("Welcome to the AI Hub!")
-                   print("1. AI Chat")
-                   print("2. PDF Analysis")
-                   print("3. Prompt Engineering")
-                   print("4. AI Projects")
-                   print("5. Back")
-                   input_prompt = input("Please select an option: ")
-           
-                   match input_prompt:
-                       case "1":
-                           print("You selected AI Chat.")
-                       case "2":
-                           print("You selected PDF Analysis.")
-                       case "3":
-                           print("You selected Prompt Engineering.")
-                       case "4":
-                           print("You selected AI Projects.")
-                       case "5":
-                           break
-                       case _:
-                           print("Invalid input. Please try again.")
+        print("Welcome to the AI Hub!")
+        print("1. AI Chat")
+        print("2. PDF Analysis")
+        print("3. Prompt Engineering")
+        print("4. AI Projects")
+        print("5. Back")
+        input_prompt = input("Please select an option: ")   
+        
+        if input_prompt=="5":
+            return
+        
+        FFunctions = [aiChat,pdfAnalysis,promptEngineering,aiProjects]
+        FFunctions[int(input_prompt)-1]()
+
+def aiChat():
+    print("AI Chat")   
+def pdfAnalysis():
+    print("PDFanalysis")  
+def promptEngineering():
+    print("promptEngineering")     
+def aiProjects():
+    print("aiProjects")    
+                  
 def growth_tracker():
     while True:
                        print("Welcome to the growth_tracker Hub!")
