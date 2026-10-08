@@ -12,6 +12,8 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
+from google import genai
+from pypdf import PdfReader
 
 with open("progress.json", "r") as f:
     data = json.load(f)
@@ -493,11 +495,41 @@ def ai_lab():
         
         FFunctions = [aiChat,pdfAnalysis,promptEngineering,aiProjects]
         FFunctions[int(input_prompt)-1]()
-
+client=genai.Client()
 def aiChat():
-    print("AI Chat")   
+    try:
+        
+        messages=[]
+
+        while True: 
+                message=input("enter the message: ") 
+                if message=="exit":
+                    break  
+                messages.append(message) 
+                response = client.models.generate_content(
+                    model="gemini-3.5-flash-lite",
+                    contents=messages
+        
+                )
+                messages.append(response.text)
+                print(response.text)
+
+    except Exception as e:
+        print(f"Hata kodu {e}")
 def pdfAnalysis():
-    print("PDFanalysis")  
+    print("PDFanalysis") 
+    try:
+        while True:
+            file_path=input("pdf dosya yolu girin: ").strip().strip("'\"")
+            reader = PdfReader(file_path)
+            metin = "".join([sayfa.extract_text() for sayfa in reader.pages])
+            response = client.models.generate_content(
+                model="gemini-3.5-flash-lite",
+                contents=metin
+            )
+            print(response.text)
+    except Exception as e:
+        print(f"hata kodu: {e}")
 def promptEngineering():
     print("promptEngineering")     
 def aiProjects():
