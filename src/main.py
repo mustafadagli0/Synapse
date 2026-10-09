@@ -14,6 +14,7 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 from google import genai
 from pypdf import PdfReader
+from google.genai import types
 
 with open("progress.json", "r") as f:
     data = json.load(f)
@@ -517,24 +518,78 @@ def aiChat():
     except Exception as e:
         print(f"Hata kodu {e}")
 def pdfAnalysis():
+    messages=[]
     print("PDFanalysis") 
     try:
+        file_path=input("pdf dosya yolu girin: ").strip().strip("'\"")
         while True:
-            file_path=input("pdf dosya yolu girin: ").strip().strip("'\"")
+            message=input("Enter the message: ")
+            if message=="exit":
+                break
+            messages.append(message)
             reader = PdfReader(file_path)
-            metin = "".join([sayfa.extract_text() for sayfa in reader.pages])
+            uploaded_file=client.files.upload(file=file_path)
             response = client.models.generate_content(
                 model="gemini-3.5-flash-lite",
-                contents=metin
+                contents=[
+                    uploaded_file,
+                    messages
+                ]
             )
+            messages.append(response.text)
             print(response.text)
     except Exception as e:
         print(f"hata kodu: {e}")
 def promptEngineering():
-    print("promptEngineering")     
+    try:
+          
+        messages=[]
+
+        while True: 
+            message=input("Enter the message: ") 
+            if message=="exit":
+                break  
+            messages.append(message) 
+            response = client.models.generate_content(
+                model="gemini-3.5-flash-lite",
+                contents=messages,
+                config=types.GenerateContentConfig(system_instruction="sen python öğretmenisin ve cevap verirken sırasıyla konu,açıklama ve örnek şeklinde açıkla")
+                )
+            messages.append(response.text)
+            print(response.text)
+
+    except Exception as e:
+     print(f"Hata kodu {e}")
 def aiProjects():
-    print("aiProjects")    
-                  
+    print("aiProjects")
+    print("1. ia_Study_Assistant")
+    print("2. Back")
+    input_prompt = int(input("Please select an option: "))
+    if input_prompt == 2:
+        return
+    if input_prompt == 1:
+        ia_Study_Assistant()    
+
+def ia_Study_Assistant():
+    print("ia_Study_Assistant")
+    try:
+        topics=[]
+        while True:
+            topic=input("What is your topic?")
+            if topic=="exit":
+                break
+            topics.append(topic)
+            response=client.models.generate_content(
+                model="gemini-3.5-flash-lite",
+                contents=topics,
+                config=types.GenerateContentConfig(
+                    system_instruction="sen sana verilen mesajı konu olarak algıla ve başlangıç seviyesinde açıkla maddeler şeklinde açıkla çok uzun cevap verme seçilen konu hakkında 3 pratik soru hazırla kolaydan zora doğru gitsin "
+                )
+            )
+            topics.append(response.text)
+            print(response.text)
+    except Exception as e:
+        print(f"Hata kodu: {e}")
 def growth_tracker():
     while True:
                        print("Welcome to the growth_tracker Hub!")
