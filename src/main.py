@@ -27,14 +27,20 @@ def load_projects():
         raw_data = json.load(f)
     return raw_data.get("projects", [])
 
-
+def load_progress():
+    with open("progress.json") as f:
+        data = json.load(f)
+    return data.get("pythonProgress",[])
+        
 def save_projects(projects):
     with open("projects.json", "w") as f:
         json.dump({"projects": projects}, f, indent=4)
 
 
 def save_progress(a):
-    data["pythonProgress"][a] = True
+    with open ("progress.json") as f:
+        data=f.loads("pythonProgress")
+    data[a]["status"] = True
     with open("progress.json", "w") as f:
         json.dump(data, f)
 
@@ -61,24 +67,29 @@ def gitRoadMap():
 def pythonRoadMap():
      while True:
         pythonTopics=[
-                  "Variables",
-                  "Data Types",
-                  "Operators",
-                  "If / Else",
-                  "Loops",
-                  "Functions",
-                  "Modules",
-                  "OOP",
-                  "File Handling",
-                  "Back"
-               ]
+            "Variables",
+            "Data Types",
+            "Operators",
+            "If / Else",
+            "Loops",
+            "Functions",
+            "Modules",
+            "OOP",
+            "File Handling",
+            "Back"
+        ]
         
         with open("progress.json", "r") as f:
             data = json.load(f)      
+        data=data["pythonProgress"]
+        for index, item in enumerate(data, start=1):
+            print(
+                    f"{index}. {item['Name']} Progress: "
+                f"{'Completed' if item['status'] else 'Not Completed'}"
+            )
 
-        for index,topic in enumerate(pythonTopics,start=1):
-                  print(f"{index}. {topic} Progress: {'Completed' if data['pythonProgress'][index-1] else 'Not Completed'}")
-                   
+   
+
         input_prompt = input("Please select an option: ") 
 
         if int(input_prompt) == 10:
@@ -590,29 +601,46 @@ def ia_Study_Assistant():
             print(response.text)
     except Exception as e:
         print(f"Hata kodu: {e}")
+
 def growth_tracker():
     while True:
-                       print("Welcome to the growth_tracker Hub!")
-                       print("1. Learning Progress")
-                       print("2. Completed Projects")
-                       print("3. Skills")
-                       print("4. Statistics")
-                       print("5. Back")
-                       input_prompt = input("Please select an option: ")
-               
-                       match input_prompt:
-                           case "1":
-                               print("You selected Learning Progress.")
-                           case "2":
-                               print("You selected Completed Projects.")
-                           case "3":
-                               print("You selected Skills.")
-                           case "4":
-                               print("You selected Statistics.")
-                           case "5":
-                               break
-                           case _:
-                               print("Invalid input. Please try again.")
+        print("Welcome to the growth_tracker Hub!")
+        print("1. Learning Progress")
+        print("2. Completed Projects")
+        print("3. Skills")
+        print("4. Statistics")
+        print("5. Back")
+        input_prompt = int(input("Please select an option: "))
+
+        if input_prompt == 5:
+            return
+        functions=[learningProgress,completedProjects,skills,statistics]
+        functions[input_prompt-1]()
+
+def learningProgress():
+    print("learningProgress")
+    with open("progress.json", "r") as f:
+        data = json.load(f) 
+    data=data['pythonProgress']
+    for index,item in enumerate(data,start=1):
+        print(f"{index}. {item["Name"]} STATUS: {item["status"]}")
+    '''
+        --- Learning Progress ---
+
+        Python Learning Progress
+        Completed topics: 6/9
+        Remaining topics: 3
+        Overall progress: 66.7%
+        
+    '''
+def completedProjects():
+    print("completedProjects")
+def skills():
+    print("skills")
+def statistics():
+    print("statistics")
+
+                       
 
 
 

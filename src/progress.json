@@ -1,1 +1,34 @@
-{"pythonProgress": [false, false, true, false, false, false, true, false, false, false]}
+{"pythonProgress": [
+    {
+    "Name":"Veriables",
+    "status":false
+    },
+    {
+    "Name":"Data Types",
+    "status":true
+    },
+    { 
+    "Name":"If / Else",
+    "status":false
+    },
+    {
+    "Name":"Loops",
+    "status":false
+    },
+    {
+    "Name":"Functions",
+    "status":false
+    },
+    {
+    "Name":"Modules",
+    "status":false
+    },
+    {
+    "Name":"OOP",
+    "status":false
+    },
+    {
+    "Name":"File Handling",
+    "status":false
+    }
+]}
