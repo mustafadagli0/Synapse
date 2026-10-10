@@ -6,6 +6,20 @@
             "technologies": [
                 "python"
             ]
+        },
+        {
+            "name": "proje2",
+            "description": "fsflblblblblblbllbblsf",
+            "technologies": [
+                "python,html,css"
+            ]
+        },
+        {
+            "name": "proje3",
+            "description": "fsfsdfdsfsfsfsadadafsf",
+            "technologies": [
+                "python,java,react"
+            ]
         }
     ]
 }

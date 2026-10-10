@@ -22,6 +22,14 @@ with open("progress.json", "r") as f:
 
 df=None
 
+skills=[
+    {"Name":"Python ","level":"beginner"},
+    {"Name":"Pandas ","level":"beginner"},
+    {"Name":"Data Visualization ",   "level":"beginner "},
+    {"Name":"Machine Learning ","level":"beginner "},
+    {"Name":"Gemini API ","level":"beginner"}
+        ]
+
 def load_projects():
     with open("projects.json", "r") as f:
         raw_data = json.load(f)
@@ -618,37 +626,46 @@ def growth_tracker():
         functions[input_prompt-1]()
 
 def learningProgress():
-    print("learningProgress")
     with open("progress.json", "r") as f:
         data = json.load(f) 
     data=data['pythonProgress']
     for index,item in enumerate(data,start=1):
         print(f"{index}. {item["Name"]} STATUS: {item["status"]}")
-    '''
-        --- Learning Progress ---
-
-        Python Learning Progress
-        Completed topics: 6/9
-        Remaining topics: 3
-        Overall progress: 66.7%
-        
-    '''
+    truedata=sum(1 for item in data if item.get("status") is True)
+    print(f"completed topics: {truedata}/{len(data)}")
+    print(f"Remaining topics: {len(data)-truedata}")
+    overall=truedata/len(data)*100
+    print(f"Overall Progress: {overall}%")
+    
 def completedProjects():
-    print("completedProjects")
+    data = load_projects()
+    for item in data:
+        techs=item.get("technologies",[])
+        print(f"{item["name"]}-{item["description"]}-{', '.join(techs) if techs else 'No technologies listed'}")
+   
+def getSkills():
+    return [
+        {"Name":"Python ","level":"beginner"},
+        {"Name":"Pandas ","level":"beginner"},
+        {"Name":"Data Visualization ",   "level":"beginner "},
+        {"Name":"Machine Learning ","level":"beginner "},
+        {"Name":"Gemini API ","level":"beginner"}
+        ]
+
 def skills():
-    print("skills")
+    data=getSkills()
+    for index,item in enumerate(data):
+        print(f"Name:{data[index]["Name"]}- level:{data[index]["level"]}")
+
 def statistics():
-    print("statistics")
-
+    data=load_progress()
+    sumStatus=sum(1 for item in data if item.get("status") is True)
+    print(f"Completed learning topics: {sumStatus}")
+    sumProject=load_projects()
+    print(f"Completed Projects: {len(sumProject)}")
+    skills=getSkills()
+    print(f"Total Skills: {len(skills)}")
                        
-
-
-
-
-
-
-
-
 
 
 while True:
