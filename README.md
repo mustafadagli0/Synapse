@@ -1,77 +1,39 @@
 # 🧠 Synapse
 
-Synapse is a personal learning and development platform built with Python.
+**Synapse** is a Python-based learning and development platform designed to help learners improve their programming, data analysis, machine learning, and artificial intelligence skills through structured learning roadmaps and practical projects.
 
-The project is designed to support a structured journey from **Python programming → Data Analysis → Machine Learning → AI** while also tracking learning progress and projects.
+The application brings learning resources, project management, data analysis tools, machine learning exercises, AI-powered features, and progress tracking together in one place.
 
-> 🚧 Synapse is an actively developed project. Some features are still under development.
+## 🎯 Project Goals
 
----
+- Learn programming through structured learning roadmaps.
+- Practice data analysis using real datasets.
+- Explore fundamental machine learning algorithms.
+- Integrate AI models into practical applications.
+- Create and manage personal projects.
+- Track learning progress and acquired skills.
+- Develop a modular and maintainable Python application.
 
-## 🎯 Project Goal
+## 🏗️ Application Structure
 
-The main goal of Synapse is to create a single platform where I can:
+Synapse consists of six main modules and a central navigation system.
 
-- Learn programming concepts
-- Practice through projects
-- Work with real datasets
-- Track my learning progress
-- Build Data Analysis skills
-- Learn Machine Learning
-- Explore AI
-- Manage personal projects
+1. Learning Hub
+2. Project Hub
+3. Data Lab
+4. Machine Learning Lab
+5. AI Lab
+6. Growth Tracker
 
----
+The application uses a menu-based interface to navigate between modules.
 
-## 🗂️ Application Structure
+## 📚 1. Learning Hub
 
-Synapse is organized into several main modules:
+The Learning Hub provides structured roadmaps for learning programming and development tools.
 
-```text
-Synapse
-│
-├── Learning Hub
-│   ├── Python
-│   ├── SQL
-│   └── Git
-│
-├── Project Hub
-│   ├── My Projects
-│   ├── Create Project
-│   └── Project Roadmaps
-│
-├── Data Lab
-│   ├── Load Dataset
-│   ├── View Dataset
-│   ├── Data Cleaning
-│   └── Data Visualization
-│
-├── Machine Learning Lab
-│   ├── Regression
-│   ├── Classification
-│   ├── Clustering
-│   └── Model Evaluation
-│
-├── AI Lab
-│   ├── AI Chat
-│   ├── PDF Analysis
-│   ├── Prompt Engineering
-│   └── AI Projects
-│
-└── Growth Tracker
-    ├── Learning Progress
-    ├── Completed Projects
-    ├── Skills
-    └── Statistics
-```
+### Python Roadmap
 
----
-
-## 🚀 Current Features
-
-### 📚 Learning Hub
-
-Currently includes a Python learning roadmap covering:
+Topics include:
 
 - Variables
 - Data Types
@@ -80,251 +42,328 @@ Currently includes a Python learning roadmap covering:
 - Loops
 - Functions
 - Modules
-- OOP
+- Object-Oriented Programming (OOP)
 - File Handling
 
-Python learning progress is tracked automatically.
+### SQL Roadmap
 
-Progress data is stored in JSON so it can persist between sessions.
+Topics include:
 
----
+- SQL Basics
+- SELECT
+- WHERE
+- ORDER BY
+- Aggregate Functions
+- GROUP BY
+- JOINs
+- INSERT, UPDATE, DELETE
 
-### 📁 Project Hub
+### Git Roadmap
 
-The Project Hub allows users to:
+Topics include:
 
-- Create projects
-- View existing projects
-- Store project information
-- Use predefined project roadmaps
+- Git Basics
+- Repositories
+- git add
+- git commit
+- git status
+- git log
+- Branches
+- GitHub
 
-Project data is persisted using JSON.
+Each roadmap provides explanations and examples to help users understand the fundamental concepts.
 
-Example project information:
+## 📁 2. Project Hub
 
-```python
-{
-    "name": "Expense Tracker",
-    "description": "Expense tracking application",
-    "technology": "Python"
-}
-```
+The Project Hub helps users create, organize, and manage their projects.
 
----
+### Features
 
-### 📊 Data Lab
+- Create new projects.
+- View existing projects.
+- Explore project roadmaps.
+- Store project information locally.
+- Load saved projects when the application restarts.
 
-The Data Lab is currently under active development.
+Project information is stored in JSON files.
 
-Implemented features include:
+## 📊 3. Data Lab
 
-- Loading CSV datasets
-- Viewing datasets
-- Inspecting dataset information
-- Checking data types
-- Descriptive statistics
-- Missing value detection
-- Duplicate detection
-- Duplicate removal
-- Data normalization
-- Missing value handling
-- Date conversion and cleaning
-- Invalid value handling
+The Data Lab introduces data analysis and manipulation using Python.
 
-The project currently uses **Pandas** for data analysis and cleaning.
+### Dataset Management
 
----
+- Load CSV datasets using Pandas.
+- Preview the first and last rows.
+- Inspect dataset dimensions and columns.
+- Examine data types and summary information.
 
-## 🧹 Data Cleaning
+### Data Cleaning
 
-Synapse includes a practical data-cleaning workflow using Pandas.
+- Identify and handle missing values.
+- Remove duplicate records.
+- Convert columns to appropriate data types.
+- Handle invalid date values.
+- Clean inconsistent categorical data.
 
-The current workflow covers:
+### Data Visualization
 
-```text
-Load Dataset
-      ↓
-Inspect Dataset
-      ↓
-Check Missing Values
-      ↓
-Check Duplicates
-      ↓
-Normalize Data
-      ↓
-Handle Missing Values
-      ↓
-Clean Dates
-      ↓
-Handle Invalid Values
-```
+The application includes examples of:
 
-The goal is to practice working with imperfect, real-world-style data rather than only clean datasets.
+- Bar charts
+- Histograms
+- Scatter plots
+- Line charts
 
----
+### Technologies
 
-## 🛠️ Technologies
+- Pandas
+- NumPy
+- Matplotlib
 
-Current technologies used in the project:
+## 🤖 4. Machine Learning Lab
+
+The Machine Learning Lab provides introductory exercises using Scikit-learn.
+
+### Regression
+
+- Prepare features and target variables.
+- Split datasets into training and testing sets.
+- Train a Linear Regression model.
+- Generate predictions.
+- Evaluate model performance using R².
+
+### Classification
+
+- Prepare numerical features and categorical targets.
+- Train a Logistic Regression model.
+- Predict class labels.
+- Evaluate classification performance.
+
+### Clustering
+
+- Standardize numerical features.
+- Apply the K-Means clustering algorithm.
+- Assign observations to clusters.
+
+### Model Evaluation
+
+The application demonstrates common classification metrics:
+
+- Accuracy
+- Precision
+- Recall
+- F1-score
+
+**Note:** The current machine learning exercises use a small dataset for educational purposes. Their results should not be considered reliable assessments of real-world model performance.
+
+## 🧠 5. AI Lab
+
+The AI Lab integrates Google's Gemini API to provide AI-powered learning features.
+
+### AI Chat
+
+- Send messages to an AI model.
+- Receive AI-generated responses.
+- Maintain conversation context during a chat session.
+
+### PDF Analysis
+
+- Read PDF documents.
+- Extract text from PDF pages.
+- Ask questions about document content.
+- Generate explanations and summaries using AI.
+
+### Prompt Engineering
+
+- Define the AI's role using system instructions.
+- Customize prompts for beginner-friendly explanations.
+- Request structured responses.
+- Experiment with different prompting techniques.
+
+### AI Study Assistant
+
+- Generate explanations about selected topics.
+- Create study summaries.
+- Generate practice questions.
+
+### Technologies
+
+- Google Gen AI SDK
+- Gemini API
+- PyPDF
+
+**Note:** AI features require a valid API key, an available model, and sufficient API quota. Availability and usage limits may affect functionality.
+
+## 📈 6. Growth Tracker
+
+The Growth Tracker provides an overview of learning progress, projects, and skills.
+
+### Learning Progress
+
+- Display Python learning topics.
+- Show completion status for individual topics.
+- Count completed topics.
+- Calculate the completion percentage.
+
+### Completed Projects
+
+- Display completed projects.
+- Handle empty project lists with an appropriate message.
+
+### Skills
+
+The application tracks skills such as:
 
 - Python
 - Pandas
-- NumPy
-- JSON
-- Matplotlib
+- Data Visualization
+- Machine Learning
+- Gemini API
 
-More technologies will be added as the project evolves.
+Skills currently use beginner-level labels.
 
----
+### Statistics
 
-## 🗃️ Data Persistence
+The Statistics section summarizes information such as:
 
-Synapse currently uses JSON files for persistent application data.
+- Completed learning topics
+- Completed projects
+- Total skills
 
-Examples:
+## 💾 Data Persistence
 
-```text
-progress.json
-projects.json
+Synapse uses JSON files to store application data locally.
+
+### Current Uses
+
+- Save and load learning progress.
+- Save and load project information.
+- Preserve supported data between application sessions.
+
+Separate functions are used to load and save different types of data.
+
+## 🛠️ Technologies
+
+| Technology | Purpose |
+|---|---|
+| Python | Core programming language |
+| Pandas | Data manipulation and analysis |
+| NumPy | Numerical operations |
+| Matplotlib | Data visualization |
+| Scikit-learn | Machine learning |
+| Google Gen AI SDK | Gemini API integration |
+| PyPDF | PDF text extraction |
+| JSON | Local data persistence |
+| Git | Version control |
+| GitHub | Remote repository hosting |
+
+## ▶️ Installation and Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone <your-repository-url>
 ```
 
-This allows learning progress and project information to remain available after restarting the application.
+Replace `<your-repository-url>` with the URL of your GitHub repository.
 
----
+### 2. Navigate to the Project Directory
 
-## 🗺️ Roadmap
+```bash
+cd <project-directory>
+```
 
-### Phase 1 — Python Foundation
+Replace `<project-directory>` with the actual name of your project folder.
 
-- [x] Variables
-- [x] Data Types
-- [x] Operators
-- [x] If / Else
-- [x] Loops
-- [x] Functions
-- [x] Modules
-- [x] OOP
-- [x] File Handling
+### 3. Install Dependencies
 
-### Phase 2 — Application Structure
+Install the required Python packages:
 
-- [x] Main Menu
-- [x] Learning Hub
-- [x] Project Hub
-- [x] Data Lab
-- [x] Machine Learning Lab
-- [x] AI Lab
-- [x] Growth Tracker
-- [x] Navigation system
+```bash
+pip install pandas numpy matplotlib scikit-learn pypdf google-genai
+```
 
-### Phase 3 — Progress & Projects
+It is recommended to use a virtual environment to keep project dependencies isolated.
 
-- [x] Learning progress tracking
-- [x] JSON persistence
-- [x] Project creation
-- [x] Project storage
+### 4. Configure the Gemini API Key
+
+Set the `GEMINI_API_KEY` environment variable before using the AI features.
+
+On macOS or Linux:
+
+```bash
+export GEMINI_API_KEY="your-api-key"
+```
+
+Replace `your-api-key` with your own API key.
+
+**Security:** Never commit API keys, passwords, or other sensitive information to GitHub.
+
+### 5. Run the Application
+
+Run the main Python file:
+
+```bash
+python3 main.py
+```
+
+Replace `main.py` with the actual filename of your application's entry point if it is different.
+
+## 🗺️ Development Roadmap
+
+### Implemented Features
+
+- [x] Main menu and navigation
+- [x] Python learning roadmap
+- [x] SQL learning roadmap
+- [x] Git learning roadmap
+- [x] Project creation and listing
 - [x] Project roadmaps
+- [x] Dataset loading and inspection
+- [x] Data cleaning exercises
+- [x] Data visualization examples
+- [x] Regression
+- [x] Classification
+- [x] Clustering
+- [x] Model evaluation
+- [x] AI Chat
+- [x] PDF Analysis
+- [x] Prompt Engineering
+- [x] AI Study Assistant
+- [x] Learning progress tracking
+- [x] Skills overview
+- [x] Growth statistics
+- [x] JSON-based data persistence
+- [x] Basic navigation tests
+- [x] Basic persistence tests
+- [x] Empty-data handling
 
-### Phase 4 — Data Analysis
+### Planned Improvements
 
-- [x] Load datasets
-- [x] Inspect datasets
-- [x] Data cleaning
-- [x] Missing value handling
-- [x] Duplicate handling
-- [x] Data normalization
-- [x] Date cleaning
-- [ ] Data visualization
-- [ ] Exploratory Data Analysis
+- [ ] Improve error handling for missing or invalid JSON files.
+- [ ] Strengthen input validation across menus.
+- [ ] Refactor repetitive code where appropriate.
+- [ ] Expand progress tracking to cover additional learning roadmaps.
+- [ ] Improve skill management.
+- [ ] Add more comprehensive application tests.
+- [ ] Improve dependency management and setup documentation.
+- [ ] Continue improving the user experience.
 
-### Phase 5 — Machine Learning
+## 📌 Current Status
 
-- [ ] Regression
-- [ ] Classification
-- [ ] Clustering
-- [ ] Model evaluation
-- [ ] Model comparison
-- [ ] ML projects
+**Status: In Development**
 
-### Phase 6 — AI
+Synapse currently includes learning roadmaps, project management, data analysis tools, introductory machine learning exercises, AI-powered learning features, and progress tracking.
 
-- [ ] AI Chat
-- [ ] PDF Analysis
-- [ ] Prompt Engineering
-- [ ] AI Projects
-- [ ] AI integrations
+The next development phase focuses on error handling, code quality, testing, and overall application reliability.
 
-### Phase 7 — Growth Tracker
+## 💡 Project Philosophy
 
-- [ ] Learning statistics
-- [ ] Skill tracking
-- [ ] Project statistics
-- [ ] Progress dashboard
+Synapse is built around the idea that learning programming becomes more effective through structured topics, practical exercises, experimentation, and continuous progress tracking.
 
----
+The long-term goal is to develop Synapse into a more complete personal learning and development platform.
 
-## 📈 Learning Path
+## 👨‍💻 Author
 
-The long-term learning path of Synapse is:
-
-```text
-Python
-   ↓
-Data Analysis
-   ↓
-Machine Learning
-   ↓
-Artificial Intelligence
-```
-
-The project itself is also being used as a practical way to learn these technologies.
-
----
-
-## 💡 Philosophy
-
-Synapse is not only a software project.
-
-It is also a learning project.
-
-Instead of learning concepts only through theory, the goal is to learn by:
-
-**Learning → Building → Breaking → Debugging → Improving**
-
-The application will evolve together with my programming skills.
-
----
-
-## 🔮 Future Plans
-
-Future versions of Synapse may include:
-
-- Better data visualization
-- Interactive dashboards
-- Machine learning experiments
-- AI-powered learning tools
-- Automated progress analysis
-- More advanced project management
-- Improved user interface
-- More persistent application data
-- Real-world datasets and projects
-
----
-
-## 📌 Project Status
-
-**Status:** 🚧 Active Development
-
-Synapse currently has a functional application structure, Python learning system, project management system, JSON persistence, and an actively developing Data Lab.
-
-The next major focus is **Data Visualization and Exploratory Data Analysis**.
-
----
-
-## 👨‍💻 About
-
-Synapse is being developed as part of my journey toward becoming a:
-
-**Python Developer → Data Analyst → Machine Learning Engineer → AI Developer**
-
-The project is continuously evolving as I learn new concepts and apply them directly to the application.
+Developed as a personal project to practice and improve skills in Python, data analysis, machine learning, and artificial intelligence.
