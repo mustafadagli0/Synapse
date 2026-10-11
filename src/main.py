@@ -43,13 +43,23 @@ def load_progress():
 def save_projects(projects):
     with open("projects.json", "w") as f:
         json.dump({"projects": projects}, f, indent=4)
-
-
+def sqlSaveProgress(a):
+    with open("progressSql.json") as f:
+        data=json.load(f)
+    data["sqlProgress"][a]["status"]=True
+    with open("progressSql.json", "w") as f:
+        json.dump(data, f)
 def save_progress(a):
     with open ("progress.json") as f:
-        data=f.loads("pythonProgress")
-    data[a]["status"] = True
+        data=json.load(f)
+    data["pythonProgress"][a]["status"]=True
     with open("progress.json", "w") as f:
+        json.dump(data, f)
+def gitSaveProgress(a):
+    with open("progressGit.json") as f:
+        data=json.load(f)
+    data["gitProgress"][a]["status"]=True
+    with open("progressGit.json", "w") as f:
         json.dump(data, f)
 
 def learning_hub():
@@ -65,11 +75,6 @@ def learning_hub():
         functions = [pythonRoadMap, sqlRoadMap, gitRoadMap]
         functions[input_prompt - 1]()  
 
-
-def sqlRoadMap():
-     print("You selected SQL Roadmap.")
-def gitRoadMap():
-     print("You selected GİT Roadmap.")
 
              
 def pythonRoadMap():
@@ -92,12 +97,12 @@ def pythonRoadMap():
         data=data["pythonProgress"]
         for index, item in enumerate(data, start=1):
             print(
-                    f"{index}. {item['Name']} Progress: "
+                    f"{index}. Name: {item['Name']}   Progress: "
                 f"{'Completed' if item['status'] else 'Not Completed'}"
             )
 
    
-
+        print("9. Press for Back")
         input_prompt = input("Please select an option: ") 
 
         if int(input_prompt) == 10:
@@ -304,7 +309,392 @@ def File_Handling():
     
     save_progress(8)
 
+def sqlRoadMap():
+    while True:
+        sqlTopics=[
+            "SQL Basics",
+            "SELECT",
+            "WHERE",
+            "ORDER BY",
+            "Aggregate Functions (COUNT, SUM, AVG)",
+            "GROUP BY",
+            "JOINs",
+            "INSERT, UPDATE, DELETE",
+            "Back"
+        ]
+             
+        with open("progressSql.json", "r") as f:
+            data = json.load(f)      
+        data=data["sqlProgress"]
+        for index, item in enumerate(data, start=1):
+            print(
+                 f"{index}. Name: {item['Name']}     Progress: "
+                 f"{'Completed' if item['status'] else 'Not Completed'}"
+                )
+     
+        
+        print("9. Press for Back")
+        input_prompt = input("Please select an option: ") 
+     
+        if int(input_prompt) == 9:
+            return 
+        
+        Functions=[sqlBasics,select,where,orderBy,aggregateFunctions,groupBy,joins,ınsertUpdateDelete]
+        Functions[int(input_prompt)-1]()  
+            
+def sqlBasics():    
+    print("\n--- SQL Basics ---")
+    print("SQL stands for Structured Query Language.")
+    print("SQL is used to communicate with databases.")
+    print("A database is an organized collection of data.")
+    print("A table stores data in rows and columns.")
+    print("A row represents a single record.")
+    print("A column represents a specific type of information.")
 
+    print("\nExample:")
+    print("Table: Students")
+    print("ID | Name | Age")
+    print("1  | Ali  | 20")
+    print("2  | Ayse | 22")
+
+    print("\nIn this example:")
+    print("- Students is the table name.")
+    print("- Each student is represented by a row.")
+    print("- ID, Name, and Age are columns.")
+    sqlSaveProgress(0)
+
+def select():    
+    print("\n--- SELECT ---")
+    print("SELECT is used to retrieve data from a database.")
+    print("\nExample table: Students")
+    print("ID | Name  | Age")
+    print("1  | Ali   | 20")
+    print("2  | Ayse  | 22")
+    print("3  | Mehmet| 19")
+
+    print("\nSelect all columns:")
+    print("SELECT * FROM Students;")
+
+    print("\nSelect specific columns:")
+    print("SELECT Name, Age FROM Students;")
+
+    print("\nThe * symbol selects all columns.")
+    print("You can specify column names to select particular data.")
+
+    sqlSaveProgress(1)
+def where():    
+    print("\n--- WHERE ---")
+    print("WHERE is used to filter records based on a condition.")
+
+    print("\nExample table: Students")
+    print("ID | Name   | Age")
+    print("1  | Ali    | 20")
+    print("2  | Ayse   | 22")
+    print("3  | Mehmet | 19")
+
+    print("\nSelect students older than 20:")
+    print("SELECT * FROM Students WHERE Age > 20;")
+
+    print("\nSelect a student by name:")
+    print("SELECT * FROM Students WHERE Name = 'Ali';")
+
+    print("\nCommon comparison operators:")
+    print(">   Greater than")
+    print("<   Less than")
+    print("=   Equal to")
+    print(">=  Greater than or equal to")
+    print("<=  Less than or equal to")
+    print("<>  Not equal to")
+    sqlSaveProgress(2)
+    
+def orderBy():    
+    print("\n--- ORDER BY ---")
+    print("ORDER BY is used to sort query results.")
+
+    print("\nExample table: Students")
+    print("ID | Name   | Age")
+    print("1  | Ali    | 20")
+    print("2  | Ayse   | 22")
+    print("3  | Mehmet | 19")
+
+    print("\nSort by age, ascending:")
+    print("SELECT * FROM Students ORDER BY Age ASC;")
+
+    print("\nSort by age, descending:")
+    print("SELECT * FROM Students ORDER BY Age DESC;")
+
+    print("\nASC means ascending order (smallest to largest).")
+    print("DESC means descending order (largest to smallest).")
+    print("If you omit ASC or DESC, ascending order is used by default.")
+    sqlSaveProgress(3)
+
+def aggregateFunctions():    
+    print("\n--- Aggregate Functions ---")
+    print("Aggregate functions perform calculations on multiple rows.")
+
+    print("\nExample table: Students")
+    print("ID | Name   | Age")
+    print("1  | Ali    | 20")
+    print("2  | Ayse   | 22")
+    print("3  | Mehmet | 19")
+
+    print("\nCOUNT - Counts the number of records:")
+    print("SELECT COUNT(*) FROM Students;")
+
+    print("\nSUM - Calculates the total:")
+    print("SELECT SUM(Age) FROM Students;")
+
+    print("\nAVG - Calculates the average:")
+    print("SELECT AVG(Age) FROM Students;")
+
+    print("\nMIN - Finds the smallest value:")
+    print("SELECT MIN(Age) FROM Students;")
+
+    print("\nMAX - Finds the largest value:")
+    print("SELECT MAX(Age) FROM Students;")
+    sqlSaveProgress(4)
+
+def groupBy():    
+    print("\n--- GROUP BY ---")
+    print("GROUP BY groups rows that have the same values.")
+    print("It is often used with aggregate functions.")
+
+    print("\nExample table: Students")
+    print("ID | Name   | City")
+    print("1  | Ali    | Istanbul")
+    print("2  | Ayse   | Ankara")
+    print("3  | Mehmet | Istanbul")
+    print("4  | Zeynep | Ankara")
+
+    print("\nCount students in each city:")
+    print("SELECT City, COUNT(*)")
+    print("FROM Students")
+    print("GROUP BY City;")
+
+    print("\nGROUP BY groups students by city.")
+    print("COUNT(*) counts the students in each group.")
+    print("The result shows the number of students in each city.")
+    sqlSaveProgress(5)
+
+def joins():    
+    print("\n--- JOINs ---")
+    print("JOIN is used to combine data from multiple tables.")
+    
+    print("\nStudents table:")
+    print("ID | Name")
+    print("1  | Ali")
+    print("2  | Ayse")
+    
+    print("\nGrades table:")
+    print("StudentID | Grade")
+    print("1         | 90")
+    print("2         | 85")
+    
+    print("\nINNER JOIN:")
+    print("SELECT Students.Name, Grades.Grade")
+    print("FROM Students")
+    print("INNER JOIN Grades")
+    print("ON Students.ID = Grades.StudentID;")
+    
+    print("\nINNER JOIN returns rows that match in both tables.")
+    
+    print("\nOther common JOIN types:")
+    print("LEFT JOIN  - Returns all rows from the left table.")
+    print("RIGHT JOIN - Returns all rows from the right table.")
+    print("FULL JOIN  - Returns matching and non-matching rows from both tables.")
+    sqlSaveProgress(6)
+
+def ınsertUpdateDelete():    
+    print("\n--- INSERT, UPDATE, DELETE ---")
+    print("These commands are used to modify data in a database.")
+
+    print("\n1. INSERT - Adds a new record:")
+    print("INSERT INTO Students (ID, Name, Age)")
+    print("VALUES (4, 'Mehmet', 21);")
+
+    print("\n2. UPDATE - Modifies an existing record:")
+    print("UPDATE Students")
+    print("SET Age = 22")
+    print("WHERE ID = 4;")
+
+    print("\n3. DELETE - Removes a record:")
+    print("DELETE FROM Students")
+    print("WHERE ID = 4;")
+
+    print("\nINSERT adds data.")
+    print("UPDATE changes existing data.")
+    print("DELETE removes data.")
+
+    print("\nWarning: Always use WHERE carefully with UPDATE and DELETE.")
+    print("Without WHERE, all records may be affected.")
+    sqlSaveProgress(7)
+
+def gitRoadMap():
+    while True:
+        gitTopics=[
+            "Git Basics",
+            "Repository",
+            "git add",
+            "git commit",
+            "git status",
+            "git log",
+            "Branches",
+            "GitHub",
+            "Back"
+           ]
+           
+        with open("progressGit.json", "r") as f:
+            data = json.load(f)      
+        data=data["gitProgress"]
+        for index, item in enumerate(data, start=1):
+               print(
+                       f"{index}. Name: {item['Name']}    Progress: "
+                   f"{'Completed' if item['status'] else 'Not Completed'}"
+               )
+   
+      
+        print("9. Press for Back")
+        input_prompt = input("Please select an option: ") 
+   
+        if int(input_prompt) == 10:
+               return 
+        Functions=[gitBasics,repository,gitAdd,gitCommit,gitStatus,gitLog,branches,gitHub]
+        Functions[int(input_prompt)-1]()      
+
+def gitBasics():
+    print("\n--- Git Basics ---")
+    print("Git is a version control system.")
+    print("It tracks changes made to files over time.")
+    print("Git helps developers work on projects safely.")
+    print("You can review previous changes and restore earlier versions.")
+    print("\nGit and GitHub are different.")
+    print("Git is a tool for tracking changes.")
+    print("GitHub is an online platform for hosting Git repositories.")
+    gitSaveProgress(0)
+
+def repository():
+    print("\n--- Repository ---")
+    print("A repository is a place where Git tracks your project files.")
+    print("It stores your files and their change history.")
+
+    print("\nTwo common types of repositories:")
+    print("1. Local Repository - Stored on your computer.")
+    print("2. Remote Repository - Stored on a remote server, such as GitHub.")
+
+    print("\nExample commands:")
+    print("git init")
+    print("git clone <repository-url>")
+
+    print("\ngit init creates a new Git repository.")
+    print("git clone copies an existing repository.")
+    gitSaveProgress(1)
+
+def gitAdd():
+    print("\n--- Git Add ---")
+    print("git add prepares changes for the next commit.")
+    print("It adds changes to the staging area.")
+
+    print("\nExample commands:")
+    print("git add main.py")
+    print("git add .")
+
+    print("\ngit add main.py stages changes in main.py.")
+    print("git add . stages changes in the current directory.")
+
+    print("\nTypical workflow:")
+    print("1. Modify your files.")
+    print("2. Run git add.")
+    print("3. Run git commit.")
+    gitSaveProgress(2)
+
+def gitCommit():
+    print("\n--- Git Commit ---")
+    print("A commit saves a snapshot of staged changes.")
+    print("Each commit has a message describing the changes.")
+
+    print("\nExample command:")
+    print('git commit -m "Add login feature"')
+
+    print("\nThe -m option lets you write a commit message.")
+    print("A good message briefly explains what changed.")
+
+    print("\nTypical workflow:")
+    print("1. Modify your files.")
+    print("2. Run git add .")
+    print('3. Run git commit -m "Describe your changes"')
+    gitSaveProgress(3)
+
+def gitStatus():
+    print("\n--- Git Status ---")
+    print("git status shows the current state of your repository.")
+    print("It tells you which files have changed.")
+    print("It also shows which changes are staged or unstaged.")
+
+    print("\nExample command:")
+    print("git status")
+
+    print("\nCommon file states:")
+    print("Untracked - Git is not tracking the file yet.")
+    print("Modified  - A tracked file has been changed.")
+    print("Staged    - Changes are ready to be committed.")
+
+    print("\nTip: Run git status before committing to review your changes.")
+    gitSaveProgress(4)
+
+def gitLog():
+    print("\n--- Git Log ---")
+    print("git log displays the commit history of a repository.")
+    print("It shows previous commits and their information.")
+
+    print("\nExample commands:")
+    print("git log")
+    print("git log --oneline")
+
+    print("\ngit log shows detailed commit information.")
+    print("git log --oneline displays each commit on a single line.")
+
+    print("\nCommit history can help you understand how a project has changed.")
+    gitSaveProgress(5)
+
+def branches():
+    print("\n--- Git Branches ---")
+    print("A branch is a separate line of development.")
+    print("Branches let you work on new features without changing the main branch.")
+
+    print("\nExample commands:")
+    print("git branch")
+    print("git branch feature-login")
+    print("git switch feature-login")
+    print("git switch -c feature-login")
+
+    print("\ngit branch lists your branches.")
+    print("git branch feature-login creates a new branch.")
+    print("git switch feature-login switches to an existing branch.")
+    print("git switch -c feature-login creates and switches to a new branch.")
+
+    print("\nBranches help developers work on features separately.")
+    gitSaveProgress(6)
+
+def gitHub():
+    print("\n--- GitHub ---")
+    print("GitHub is an online platform for hosting Git repositories.")
+    print("It helps developers store, share, and collaborate on code.")
+
+    print("\nCommon commands:")
+    print("git remote add origin <repository-url>")
+    print("git push -u origin main")
+    print("git pull")
+
+    print("\ngit remote add origin connects your local repository to a remote repository.")
+    print("git push uploads your commits to the remote repository.")
+    print("git pull downloads changes from the remote repository.")
+
+    print("\nTypical workflow:")
+    print("1. Create a repository on GitHub.")
+    print("2. Connect your local repository.")
+    print("3. Commit your changes.")
+    print("4. Push your commits to GitHub.")
+    gitSaveProgress(7)
 
 def project_hub():
     while True:
@@ -322,6 +712,9 @@ def project_hub():
 def my_projects():
     print("You selected My Projects.")
     projects = load_projects()
+    if len(projects)==0:
+        print("You don't have any completed projects yet.")
+        return
     print("My Projects:")
     for project in projects:
         techs = project.get("technologies", [])
@@ -639,6 +1032,8 @@ def learningProgress():
     
 def completedProjects():
     data = load_projects()
+    if len(data)==0:
+        print("You don't have any completed projects yet.")
     for item in data:
         techs=item.get("technologies",[])
         print(f"{item["name"]}-{item["description"]}-{', '.join(techs) if techs else 'No technologies listed'}")
